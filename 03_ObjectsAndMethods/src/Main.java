@@ -9,9 +9,13 @@ public class Main {
         petyaBasket.add("Бочка", 2900);
 
         Basket mashaBasket = new Basket("Стол", 5000);
+        Basket chuBasket = new Basket();
+        chuBasket.add("Люк", 300, 2, 33.7);
 
         vasyaBasket.print("Корзина Васи: ");
         petyaBasket.print("Корзина Пети: ");
         mashaBasket.print("Корзина Маши: ");
+
+        chuBasket.print("Корзина Чу: ");
     }
 }
