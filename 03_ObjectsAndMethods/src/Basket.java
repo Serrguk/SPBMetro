@@ -3,6 +3,8 @@ public class Basket {
     private int totalPrice;
     private int limit;
     private double weight = 0;
+    private static double totalWeight;
+    private static int allTotalPrice;
 
     public Basket() {
         items = "Список товаров: ";
@@ -32,22 +34,35 @@ public class Basket {
             return;
         items = items + name + " - " + count + " шт. - " + price + "\n";
         totalPrice = totalPrice + count * price;
+        allTotalPrice = allTotalPrice + totalPrice;
     }
 
     public void add(String name, int price, double weight) {
         add(name, price, 1);
         this.weight = this.weight + weight;
+        totalWeight = totalWeight + weight;
     }
 
     public void add(String name, int price, int count, double weight) {
         add(name, price, count);
         this.weight = this.weight + count * weight;
+        totalWeight = totalWeight + weight;
     }
 
     public void clear() {
         items = "";
         totalPrice = 0;
         weight = 0;
+        totalWeight = 0;
+        allTotalPrice = 0;
+    }
+
+    public static double getTotalWeight() {
+        return totalWeight;
+    }
+
+    public static int getAllTotalPrice() {
+        return allTotalPrice;
     }
 
     public int getTotalPrice() {

@@ -17,5 +17,8 @@ public class Main {
         mashaBasket.print("Корзина Маши: ");
 
         chuBasket.print("Корзина Чу: ");
+
+        System.out.println("Общий вес всех корзин: " + Basket.getTotalWeight());
+        System.out.println("Общая стоимость всех корзин: " + Basket.getAllTotalPrice());
     }
 }
