@@ -1,15 +1,6 @@
 package ru.skillbox;
 
-public class HDD {
-    private final HDDType hddType;
-    private final int memorySize;
-    private final double weight;
-
-    public HDD(HDDType hddType, int memorySize, double weight) {
-        this.hddType = hddType;
-        this.memorySize = memorySize;
-        this.weight = weight;
-    }
+public record HDD(HDDType hddType, int memorySize, double weight) {
 
     public HDDType getHddType() {
         return hddType;

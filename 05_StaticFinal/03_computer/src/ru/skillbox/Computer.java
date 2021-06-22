@@ -1,23 +1,8 @@
 package ru.skillbox;
 
-public class Computer {
-    private final String vendor;
-    private final String name;
-    private final Processor processor;
-    private final RAM ram;
-    private final HDD hdd;
-    private final Monitor monitor;
-    private final Keyboard keyboard;
-
-    public Computer(String vendor, String name, Processor processor, RAM ram, HDD hdd, Monitor monitor, Keyboard keyboard) {
-        this.vendor = vendor;
-        this.name = name;
-        this.processor = processor;
-        this.ram = ram;
-        this.hdd = hdd;
-        this.monitor = monitor;
-        this.keyboard = keyboard;
-    }
+public record Computer(String vendor, String name, Processor processor,
+                       RAM ram, HDD hdd, Monitor monitor,
+                       Keyboard keyboard) {
 
     public String getVendor() {
         return vendor;
