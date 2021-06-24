@@ -23,10 +23,10 @@ public class Main {
         if (number == null) {
             return -1;
         } else {
-            int lengthNumber = String.valueOf(number).length();
+            String numberString = number.toString();
             int result = 0;
-            for (int i = 0; i < lengthNumber; i++) {
-                result = result + Integer.parseInt(String.valueOf(String.valueOf(number).charAt(i)));
+            for (int i = 0; i < numberString.length(); i++) {
+                result = result + Character.getNumericValue(numberString.charAt(i));
             }
             return result;
         }
