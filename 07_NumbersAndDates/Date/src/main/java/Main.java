@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Main {
 
@@ -16,7 +19,18 @@ public class Main {
         //TODO реализуйте метод для построения строки в следующем виде
         //0 - 31.12.1990 - Mon
         //1 - 31.12.1991 - Tue
-        
-        return "";
+
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = LocalDate.of(year, month, day);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - E").localizedBy(Locale.ENGLISH);
+        int birthdayCount = 0;
+        StringBuilder text = new StringBuilder();
+
+        while (today.isAfter(birthday) || today.isEqual(birthday)) {
+            text.append(birthdayCount).append(" - ").append(formatter.format(birthday)).append(System.lineSeparator());
+            birthdayCount++;
+            birthday = birthday.plusYears(1);
+        }
+        return text.toString();
     }
 }
