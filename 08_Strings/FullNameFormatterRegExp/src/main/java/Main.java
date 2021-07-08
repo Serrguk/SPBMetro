@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -10,8 +12,16 @@ public class Main {
       if (input.equals("0")) {
         break;
       }
-      //TODO:напишите ваш код тут, результат вывести в консоль.
-      //При невалидном ФИО вывести в консоль: Введенная строка не является ФИО
+      String regex = "[А-Я][а-я]+-?[а-я]+\\s[А-Я][а-я]+\\s[А-Я][а-я]+$";
+
+      Pattern pattern = Pattern.compile(regex);
+      Matcher matcher = pattern.matcher(input);
+
+      if (!matcher.find()) System.out.println("Введенная строка не является ФИО");
+      else {
+        String[] words = input.split(" ");
+        System.out.printf("Фамилия: %s\nИмя: %s\nОтчество: %s\n", words[0], words[1], words[2]);
+      }
     }
   }
 
