@@ -9,46 +9,34 @@ public class Main {
         while (true) {
             System.out.println("Введите команду: ");
             String input = new Scanner(System.in).nextLine();
-            String[] inputWords = input.split(" ");
-            String todo = "";
-            int indexInput;
-
-            if (input.equals("")) {
+            if (input.isEmpty())
                 break;
-            } else if (inputWords[0].matches("[0-9]") && inputWords[1].equals("ADD")) {
-                    indexInput = Integer.parseInt(inputWords[0]);
-                    for (int i = 2; i < inputWords.length; i++) {
-                        todo = todo.concat(inputWords[i]) + " ";
-                    }
-                    todoList.add(indexInput, todo.trim());
-                    System.out.printf("Добавлено дело \"%s\"\n", todo.trim());
 
-            } else if (inputWords[0].equals("ADD")) {
+            String[] inputWords = input.split(" ");
+            String todoText = "";
+            if (inputWords[0].equals("ADD")) {
                 for (int i = 1; i < inputWords.length; i++) {
-                    todo = todo.concat(inputWords[i]) + " ";
+                    todoText = todoText.concat(inputWords[i]) + " ";
                 }
-                todoList.add(todo.trim());
-                System.out.printf("Добавлено дело \"%s\"\n", todo.trim());
-            }
-            else if (inputWords[0].equals("LIST")) {
-                int countTodo = 1;
-                for (String todoInList : todoList.getTodos()) {
-                    System.out.println(countTodo + " - " + todoInList);
-                    countTodo++;
-                }
-            } else if (inputWords[0].equals("EDIT")) {
-                indexInput = Integer.parseInt(inputWords[1]);
-                String todoOld = todoList.todos.get(indexInput);
+            } else if (inputWords[0].matches("[0-9]") || inputWords[0].equals("EDIT")) {
                 for (int i = 2; i < inputWords.length; i++) {
-                    todo = todo.concat(inputWords[i]) + " ";
+                    todoText = todoText.concat(inputWords[i]) + " ";
                 }
-                todoList.edit(todo.trim(), indexInput);
-                System.out.println("Дело \"" + todoOld.trim() + "\" заменено на \"" + todo.trim() + "\"");
-            } else if (inputWords[0].equals("DELETE")) {
-                indexInput = Integer.parseInt(inputWords[1]);
-
-                System.out.println("Дело " + todoList.todos.get(indexInput) + " удалено");
-                todoList.delete(indexInput);
+            }
+            if ("ADD".equals(inputWords[0])) {
+                todoList.add(todoText.trim());
+            } else if (inputWords[0].matches("0-9")) {
+                todoList.add(Integer.parseInt(inputWords[0]), todoText.trim());
+            } else if ("LIST".equals(inputWords[0])) {
+                int counterTodos = 0;
+                for (String s : todoList.getTodos()) {
+                    counterTodos++;
+                    System.out.println(counterTodos + " - " + s);
+                }
+            } else if ("DELETE".equals(inputWords[0])) {
+                todoList.delete(Integer.parseInt(inputWords[1]));
+            } else if ("EDIT".equals(inputWords[0])) {
+                todoList.edit(todoText.trim(), Integer.parseInt(inputWords[1]));
             }
         }
     }
