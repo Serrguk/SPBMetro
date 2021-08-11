@@ -5,25 +5,23 @@ public class TodoList {
     ArrayList<String> todos = new ArrayList<>();
 
     public void add(String todo) {
-        // TODO: добавьте переданное дело в конец списка
         todos.add(todo);
         System.out.println("Добавлено дело \"" + todo + "\"");
     }
 
     public void add(int index, String todo) {
-        // TODO: добавьте дело на указаный индекс,
-        //  проверьте возможность добавления
+        // Если index не в пределе длины списка, то вызываем метод с одним параметром
         if (index < 0 || index > todos.size()) {
             add(todo);
         } else {
             todos.add(index, todo);
-            System.out.printf("Добавлено дело \"%s\" на позицию с номером %d", todo, index);
+            System.out.printf("Добавлено дело \"%s\" на позицию с номером %d\n", todo, index);
         }
     }
 
     public void edit(String todo, int index) {
-        // TODO: заменить дело на index переданным todo индекс,
-        //  проверьте возможность изменения
+        // Заменяем дело, только если индекс существует в списке
+        // В противном случае не делаем ничего
         if (index >= 0 && index < todos.size()) {
             String todoOld = todos.get(index);
             todos.set(index, todo);
@@ -32,8 +30,8 @@ public class TodoList {
     }
 
     public void delete(int index) {
-        // TODO: удалить дело находящееся по переданному индексу,
-        //  проверьте возможность удаления дела
+        // Удаляем дело, только если индекс существует в списке
+        // В противном случае не делаем ничего
         if (index >= 0 && index < todos.size()) {
             String todoRemove = todos.get(index);
             todos.remove(index);
@@ -42,7 +40,7 @@ public class TodoList {
     }
 
     public ArrayList<String> getTodos() {
-        // TODO: вернуть список дел
+        // Просто возвращаем список
         return todos;
     }
 
