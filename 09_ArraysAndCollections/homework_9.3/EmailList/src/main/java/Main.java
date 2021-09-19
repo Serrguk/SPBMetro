@@ -1,8 +1,7 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static final String WRONG_EMAIL_ANSWER = "Неверный формат email";
+    public static final String WRONG_EMAIL_ANSWER = "Неверный формат ввода";
     private static final EmailList emailList = new EmailList();
     
     /* TODO:
@@ -27,22 +26,17 @@ public class Main {
             if (input.equals("0")) {
                 break;
             }
-            //TODO: write code here
-            String regex = "\\w+@\\w+\\.[ru]*[com]*";
             String[] words = input.split(" ");
 
             if (words[0].equals("ADD") && words.length == 2) {
-                if (words[1].toLowerCase(Locale.ROOT).matches(regex)) {
-                    emailList.add(words[1].toLowerCase(Locale.ROOT));
-                    System.out.println("Email внесён в список"); //Вывод для наглядности
-                } else System.out.println(WRONG_EMAIL_ANSWER);
+                emailList.add(words[1]);
             } else if (words[0].equals("LIST")) {
-                if (emailList.emails.size() != 0) {
-                    for (String list : emailList.emails) {
-                        System.out.println(list);
-                    }
+                if (emailList.emails.size() != 0) {        // Для наглядности сделаем проверку, пуст ли список
+                    for (int i = 0; i < emailList.emails.size(); i++)
+                        System.out.println(emailList.getSortedEmails().get(i));
+
                 } else System.out.println("Список пуст");
-            } else System.out.println("Неверный формат ввода");
+            } else System.out.println(WRONG_EMAIL_ANSWER);
         }
     }
 }
