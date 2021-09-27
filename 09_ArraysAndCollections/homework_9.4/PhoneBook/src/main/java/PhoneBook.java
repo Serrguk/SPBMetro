@@ -35,19 +35,21 @@ public class PhoneBook {
             resultName = name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
         } else correctInput = false;
 
-
-        phoneBook = new HashMap<>();
         if (correctInput) {
         phoneBook.put(resultNumber, resultName);
-        } else System.out.println("Неверный формат ввода");
+            System.out.println(resultName + ": Контакт добавлен");
+        } else System.out.println("Неверный формат ввода. Контакт добавлен не будет");
     }
 
-    public static Map<Long, String> phoneBook;
+    public static Map<Long, String> phoneBook = new HashMap<>();
 
     public String getNameByPhone(String phone) {
         // формат одного контакта "Имя - Телефон"
         // если контакт не найдены - вернуть пустую строку
-        return "";
+        Long number = Long.parseLong(phone);
+        if (phoneBook.containsKey(number)) {
+            return phoneBook.get(number) + " - " + number;
+        } else return "";
     }
 
     public Set<String> getPhonesByName(String name) {
