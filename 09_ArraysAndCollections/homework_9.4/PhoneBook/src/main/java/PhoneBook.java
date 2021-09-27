@@ -1,6 +1,4 @@
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,24 +7,42 @@ public class PhoneBook {
         // проверьте корректность формата имени и телефона
         // если такой номер уже есть в списке, то перезаписать имя абонента
 
-        String regex = "[^0-9]";
-
-        Pattern pattern = Pattern.compile(regex);
+        String regexNumber = "[^0-9]";
+        Pattern pattern = Pattern.compile(regexNumber);
         Matcher matcher = pattern.matcher(phone);
-
         String result = matcher.replaceAll("");
-        String number;
+        String numberPhone = "0";
 
+        boolean correctInput = true;
+
+        /*
+        ПРОВЕРКУ НА КОРРЕКТНОСТЬ НОМЕРА НУЖНО ИСПОЛЬЗОВАТЬ И В МЕТОДЕ ПОИСКА
+        ПО НОМЕРУ? ВЫНЕСТИ ЭТУ ПРОВЕРКУ В ОТДЕЛЬНЫЙ ПРИВАТНЫЙ МЕТОД?
+        (Не забыть УДОЛИТЬ этот коммент)
+         */
         if (result.length() == 11 && result.charAt(0) == '7') {
-            number = result;
+            numberPhone = result;
         } else if (result.length() == 11 && result.charAt(0) == '8') {
-            number = "7".concat(result.substring(1));
+            numberPhone = "7".concat(result.substring(1));
         } else if (result.length() == 10) {
-            number = "7".concat(result);
-        } else System.out.println("Неверный формат номера");
+            numberPhone = "7".concat(result);
+        } else correctInput = false;
+        long resultNumber = Long.parseLong(numberPhone);
+
+        String regexContact = "[А-я]+";
+        String resultName = null;
+        if (name.matches(regexContact)) {
+            resultName = name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
+        } else correctInput = false;
+
+
+        phoneBook = new HashMap<>();
+        if (correctInput) {
+        phoneBook.put(resultNumber, resultName);
+        } else System.out.println("Неверный формат ввода");
     }
 
-    private static Map<Long, String> phoneBook;
+    public static Map<Long, String> phoneBook;
 
     public String getNameByPhone(String phone) {
         // формат одного контакта "Имя - Телефон"
