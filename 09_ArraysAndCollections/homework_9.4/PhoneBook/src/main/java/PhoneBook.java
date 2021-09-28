@@ -15,11 +15,6 @@ public class PhoneBook {
 
         boolean correctInput = true;
 
-        /*
-        ПРОВЕРКУ НА КОРРЕКТНОСТЬ НОМЕРА НУЖНО ИСПОЛЬЗОВАТЬ И В МЕТОДЕ ПОИСКА
-        ПО НОМЕРУ? ВЫНЕСТИ ЭТУ ПРОВЕРКУ В ОТДЕЛЬНЫЙ ПРИВАТНЫЙ МЕТОД?
-        (Не забыть УДОЛИТЬ этот коммент)
-         */
         if (result.length() == 11 && result.charAt(0) == '7') {
             numberPhone = result;
         } else if (result.length() == 11 && result.charAt(0) == '8') {
@@ -61,7 +56,9 @@ public class PhoneBook {
     public Set<String> getAllContacts() {
         // формат одного контакта "Имя - Телефон"
         // если контактов нет в телефонной книге - вернуть пустой TreeSet
-        return new TreeSet<>();
+        TreeSet<String> stringTreeSet = new TreeSet<>();
+        phoneBook.forEach((key, value) -> stringTreeSet.add(value + " - " + key));
+        return stringTreeSet;
     }
 
 }

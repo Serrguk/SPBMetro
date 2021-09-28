@@ -18,5 +18,6 @@ public class Main {
 
         System.out.println(phoneBook.getNameByPhone("79050878379"));
 
+        System.out.println(phoneBook.getAllContacts());
     }
 }
