@@ -25,18 +25,20 @@ public class PhoneBook {
         long resultNumber = Long.parseLong(numberPhone);
 
         String regexContact = "[А-я]+";
-        String resultName = null;
+        String resultName = "";
         if (name.matches(regexContact)) {
             resultName = name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
         } else correctInput = false;
+        if (resultName.isEmpty() && numberPhone.isEmpty())
+            correctInput = false;
 
         if (correctInput) {
-        phoneBook.put(resultNumber, resultName);
+            phoneBook.put(resultNumber, resultName);
             System.out.println(resultName + ": Контакт добавлен");
         } else System.out.println("Неверный формат ввода. Контакт добавлен не будет");
     }
 
-    public static Map<Long, String> phoneBook = new HashMap<>();
+    private static Map<Long, String> phoneBook = new HashMap<>();
 
     public String getNameByPhone(String phone) {
         // формат одного контакта "Имя - Телефон"
@@ -50,7 +52,13 @@ public class PhoneBook {
     public Set<String> getPhonesByName(String name) {
         // формат одного контакта "Имя - Телефон"
         // если контакт не найден - вернуть пустой TreeSet
-        return new TreeSet<>();
+        TreeSet<String> stringThreeSet = new TreeSet<>();
+        for (Map.Entry<Long, String> entry : phoneBook.entrySet()) {
+            if (entry.getValue().equals(name)) {
+                stringThreeSet.add(entry.getValue() + " - " + entry.getKey());
+            }
+        }
+        return stringThreeSet;
     }
 
     public Set<String> getAllContacts() {
