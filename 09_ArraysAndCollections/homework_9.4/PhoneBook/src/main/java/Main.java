@@ -1,23 +1,50 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         PhoneBook phoneBook = new PhoneBook();
+        Scanner scanner = new Scanner(System.in);
 
-        phoneBook.addContact("(905) 087-83-79", "эБРАГИМ");
-        phoneBook.addContact("(907-83-79", "эБРАГИМ");
-        phoneBook.addContact("(905) 087-83-79", "эslj");
-        phoneBook.addContact("(905) 087-83-79", "53");
-        phoneBook.addContact("(905) 087-83-63", "чуи");
-        phoneBook.addContact("(905) 087-35-63", "степан");
 
-        PhoneBook.phoneBook.forEach((key, value) -> System.out.println(key + " : " + value));
+        while (true) {
 
-        System.out.println();
-        phoneBook.addContact("(905) 087-83-79", "Костян");
+            String input = scanner.nextLine();
 
-        PhoneBook.phoneBook.forEach((key, value) -> System.out.println(key + " : " + value));
+            while (input.isEmpty()) {
+                System.out.print("Вы ничего не ввели. Введите номер или имя: ");
+                input = scanner.nextLine();
+            }
+            if (input.equals("-1"))
+                break;
 
-        System.out.println(phoneBook.getNameByPhone("79050878379"));
+            else if (input.equals("LIST")) {
+                System.out.println(phoneBook.getAllContacts());
+            } else if (isDigit(input)) {                                   //Если ввели номер
+                if (phoneBook.getNameByPhone(input).equals("")) {   //Если номера не существует
+                    System.out.print("Такого номера в телефонной книге нет\nВведите имя абонента для номера \"" + input + "\": ");
+                    String name = scanner.nextLine();
+                    phoneBook.addContact(input, name);
+                } else {
+                    System.out.println(phoneBook.getNameByPhone(input));
+                }
+            } else if (!isDigit(input)) {
+                if (phoneBook.getPhonesByName(input).isEmpty()) {
+                    System.out.print("Такого имени в телефонной книге нет\nВведите номер телефона для абонента \"" + input + "\": ");
+                    String phone = scanner.nextLine();
+                    phoneBook.addContact(phone, input);
+                } else {
+                    System.out.println(phoneBook.getPhonesByName(input));
+                }
+            }
+        }
+    }
 
-        System.out.println(phoneBook.getAllContacts());
+    private static boolean isDigit(String string) throws NumberFormatException {
+        try {
+            Long.parseLong(string);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 }
