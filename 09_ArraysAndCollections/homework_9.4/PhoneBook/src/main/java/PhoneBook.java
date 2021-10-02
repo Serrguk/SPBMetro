@@ -6,36 +6,8 @@ public class PhoneBook {
     public void addContact(String phone, String name) {
         // проверьте корректность формата имени и телефона
         // если такой номер уже есть в списке, то перезаписать имя абонента
-
-        String regexNumber = "[^0-9]";
-        Pattern pattern = Pattern.compile(regexNumber);
-        Matcher matcher = pattern.matcher(phone);
-        String result = matcher.replaceAll("");
-        String numberPhone = "0";
-
-        boolean correctInput = true;
-
-        if (result.length() == 11 && result.charAt(0) == '7') {
-            numberPhone = result;
-        } else if (result.length() == 11 && result.charAt(0) == '8') {
-            numberPhone = "7".concat(result.substring(1));
-        } else if (result.length() == 10) {
-            numberPhone = "7".concat(result);
-        } else correctInput = false;
-        long resultNumber = Long.parseLong(numberPhone);
-
-        String regexContact = "[А-я]+";
-        String resultName = "";
-        if (name.matches(regexContact)) {
-            resultName = name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
-        } else correctInput = false;
-        if (resultName.isEmpty() && numberPhone.isEmpty())
-            correctInput = false;
-
-        if (correctInput) {
-            phoneBook.put(resultNumber, resultName);
-            System.out.println(resultName + ": Контакт добавлен");
-        } else System.out.println("Неверный формат ввода. Контакт добавлен не будет");
+        long phoneNumber = Long.parseLong(phone);
+        phoneBook.put(phoneNumber, name);
     }
 
     private static Map<Long, String> phoneBook = new HashMap<>();
@@ -69,4 +41,48 @@ public class PhoneBook {
         return stringTreeSet;
     }
 
+    public static long checkNumber(String number) {
+        boolean check = true;
+        String numberPhone = "";
+
+        if (number.isEmpty() || !isDigit(number)) {
+            check = false;
+        } else {
+            String regexNumber = "[^0-9]";
+            Pattern pattern = Pattern.compile(regexNumber);
+            Matcher matcher = pattern.matcher(number);
+            String result = matcher.replaceAll("");
+
+            if (result.length() == 11 && result.charAt(0) == '7') {
+                numberPhone = result;
+            } else if (result.length() == 11 && result.charAt(0) == '8') {
+                numberPhone = "7".concat(result.substring(1));
+            } else if (result.length() == 10) {
+                numberPhone = "7".concat(result);
+            } else {
+                check = false;
+            }
+        }
+        if (check) {
+            return Long.parseLong(numberPhone);
+        } else return 0;
+    }
+
+    public static String checkName(String name) {
+        String regexContact = "[А-я]+";
+        if (!name.matches(regexContact) || name.isEmpty() || isDigit(name)) {
+            return "";
+        } else {
+            return name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
+        }
+    }
+
+    private static boolean isDigit(String string) throws NumberFormatException {
+        try {
+            Long.parseLong(string);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
