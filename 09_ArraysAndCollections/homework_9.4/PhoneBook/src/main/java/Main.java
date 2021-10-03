@@ -8,15 +8,13 @@ public class Main {
         System.out.print("Введите номер, имя или команду: ");
         while (true) {
             String input = scanner.nextLine();
-
             while (input.isEmpty()) {
                 System.out.print("Вы ничего не ввели. Введите номер или имя: ");
                 input = scanner.nextLine();
             }
-            if (input.equals("EXIT"))
+            if (input.equals("EXIT")) {
                 break;
-
-            else if (input.equals("LIST")) {
+            } else if (input.equals("LIST")) {
                 System.out.println(phoneBook.getAllContacts());
 
             } else if (!PhoneBook.checkName(input).equals("")) {
