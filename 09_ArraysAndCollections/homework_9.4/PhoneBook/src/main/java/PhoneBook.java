@@ -6,8 +6,13 @@ public class PhoneBook {
     public void addContact(String phone, String name) {
         // проверьте корректность формата имени и телефона
         // если такой номер уже есть в списке, то перезаписать имя абонента
-        long phoneNumber = Long.parseLong(phone);
-        phoneBook.put(phoneNumber, name);
+        try {
+            if (!checkName(name).equals("") && checkNumber(phone) != 0) {
+                phoneBook.put(checkNumber(phone), checkName(name));
+            }
+        } catch (NumberFormatException nfe) {
+            System.out.println("Неверные данные");
+        }
     }
 
     private static Map<Long, String> phoneBook = new HashMap<>();
@@ -44,11 +49,11 @@ public class PhoneBook {
     public static long checkNumber(String number) {
         boolean check = true;
         String numberPhone = "";
+        String regexNumber = "[^0-9]";
 
-        if (number.isEmpty() || !isDigit(number)) {
+        if (number.isEmpty() || number.matches(regexNumber)) {
             check = false;
         } else {
-            String regexNumber = "[^0-9]";
             Pattern pattern = Pattern.compile(regexNumber);
             Matcher matcher = pattern.matcher(number);
             String result = matcher.replaceAll("");
@@ -70,19 +75,10 @@ public class PhoneBook {
 
     public static String checkName(String name) {
         String regexContact = "[А-я]+";
-        if (!name.matches(regexContact) || name.isEmpty() || isDigit(name)) {
+        if (!name.matches(regexContact) || name.isEmpty()) {
             return "";
         } else {
             return name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
-        }
-    }
-
-    private static boolean isDigit(String string) throws NumberFormatException {
-        try {
-            Long.parseLong(string);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;
         }
     }
 }

@@ -3,13 +3,20 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         PhoneBook phoneBook = new PhoneBook();
+        phoneBook.addContact("950", "");
+        phoneBook.addContact("9050878379", "lsuh");
+        phoneBook.addContact("9050878379", "люся");
+        phoneBook.addContact("", "петя");
+        phoneBook.addContact("9050878378", "люся");
+
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите номер, имя или команду: ");
         while (true) {
             String input = scanner.nextLine();
             while (input.isEmpty()) {
-                System.out.print("Вы ничего не ввели. Введите номер или имя: ");
+                System.out.print("Вы ничего не ввели. Введите номер, имя или команду: ");
                 input = scanner.nextLine();
             }
             if (input.equals("EXIT")) {
@@ -33,7 +40,7 @@ public class Main {
                             phoneBook.addContact(phoneString, name);
                             System.out.printf("Такой номер был найден, поэтому контакт %s перезаписан на %s!\n", oldName, name);
                         }
-                    } else System.out.println("Неверно введённый номер");
+                    } else System.out.println("Неверно введённый номер\n");
                 } else System.out.println(phoneBook.getPhonesByName(name));
             } else if (PhoneBook.checkNumber(input) != 0) {
                 long number = PhoneBook.checkNumber(input);
