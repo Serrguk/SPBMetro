@@ -4,15 +4,6 @@ import java.util.regex.Pattern;
 
 public class PhoneBook {
 
-    public static boolean isName(String value) {
-        try {
-            parseName(value);
-            return true;
-        } catch (InvalidArgumentException e) {
-            return false;
-        }
-    }
-
     public void addContact(String phone, String name) {
         // проверьте корректность формата имени и телефона
         // если такой номер уже есть в списке, то перезаписать имя абонента
@@ -83,9 +74,19 @@ public class PhoneBook {
             return name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
         }
     }
+
     public static boolean isNumber(String value) {
         try {
             parseNumber(value);
+            return true;
+        } catch (InvalidArgumentException e) {
+            return false;
+        }
+    }
+
+    public static boolean isName(String value) {
+        try {
+            parseName(value);
             return true;
         } catch (InvalidArgumentException e) {
             return false;
