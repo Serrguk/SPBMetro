@@ -3,19 +3,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneBook {
+
+    public static boolean isName(String value) {
+        try {
+            parseName(value);
+            return true;
+        } catch (InvalidArgumentException e) {
+            return false;
+        }
+    }
+
     public void addContact(String phone, String name) {
         // проверьте корректность формата имени и телефона
         // если такой номер уже есть в списке, то перезаписать имя абонента
         try {
-            if (!checkName(name).equals("") && checkNumber(phone) != 0) {
-                phoneBook.put(checkNumber(phone), checkName(name));
+            String trueName = parseName(name);
+            if (!phoneBook.containsValue(trueName)) {
+                phoneBook.put(Long.parseLong(parseNumber(phone)), parseName(name));
             }
-        } catch (NumberFormatException nfe) {
-            System.out.println("Неверные данные");
+        } catch (InvalidArgumentException e) {
+            System.out.println();
         }
     }
 
-    private static Map<Long, String> phoneBook = new HashMap<>();
+    private final Map<Long, String> phoneBook = new HashMap<>();
 
     public String getNameByPhone(String phone) {
         // формат одного контакта "Имя - Телефон"
@@ -46,39 +57,38 @@ public class PhoneBook {
         return stringTreeSet;
     }
 
-    public static long checkNumber(String number) {
-        boolean check = true;
-        String numberPhone = "";
+    public static String parseNumber(String number) throws InvalidArgumentException {
         String regexNumber = "[^0-9]";
 
-        if (number.isEmpty() || number.matches(regexNumber)) {
-            check = false;
-        } else {
-            Pattern pattern = Pattern.compile(regexNumber);
-            Matcher matcher = pattern.matcher(number);
-            String result = matcher.replaceAll("");
+        Pattern pattern = Pattern.compile(regexNumber);
+        Matcher matcher = pattern.matcher(number);
+        String result = matcher.replaceAll("");
 
-            if (result.length() == 11 && result.charAt(0) == '7') {
-                numberPhone = result;
-            } else if (result.length() == 11 && result.charAt(0) == '8') {
-                numberPhone = "7".concat(result.substring(1));
-            } else if (result.length() == 10) {
-                numberPhone = "7".concat(result);
-            } else {
-                check = false;
-            }
+        if (result.length() == 11 && result.charAt(0) == '7') {
+            return result;
+        } else if (result.length() == 11 && result.charAt(0) == '8') {
+            return "7".concat(result.substring(1));
+        } else if (result.length() == 10) {
+            return "7".concat(result);
+        } else {
+            throw new InvalidArgumentException("Неверный формат номера");
         }
-        if (check) {
-            return Long.parseLong(numberPhone);
-        } else return 0;
     }
 
-    public static String checkName(String name) {
+    public static String parseName(String name) throws InvalidArgumentException {
         String regexContact = "[А-я]+";
         if (!name.matches(regexContact) || name.isEmpty()) {
-            return "";
+            throw new InvalidArgumentException("Неверно введённое имя");
         } else {
             return name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1).toLowerCase(Locale.ROOT);
+        }
+    }
+    public static boolean isNumber(String value) {
+        try {
+            parseNumber(value);
+            return true;
+        } catch (InvalidArgumentException e) {
+            return false;
         }
     }
 }

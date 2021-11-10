@@ -14,7 +14,6 @@ public class Main {
             }
 
             String regex = "[^0-9]";
-
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(input);
 
