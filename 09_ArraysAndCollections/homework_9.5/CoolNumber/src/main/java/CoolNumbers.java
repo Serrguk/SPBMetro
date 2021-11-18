@@ -1,12 +1,34 @@
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 public class CoolNumbers {
+    private static final String[] letters = {"А", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"};
 
     public static List<String> generateCoolNumbers() {
-        return Collections.emptyList();
+        String coolNumber;
+        List<String> coolNumbers = new ArrayList<>();
+        String letter;
+        String letter1;
+        String letter2;
+        String digit;
+        int regionInteger;
+        String region;
+
+        for (int i = 0; i < 2_000_001; i++) {
+            letter = letters[(int) (Math.random() * letters.length)];
+            letter1 = letters[(int) (Math.random() * letters.length)];
+            letter2 = letters[(int) (Math.random() * letters.length)];
+            digit = String.valueOf((int) (Math.random() * 9));
+            regionInteger = (int) (1 + Math.random() * 198);
+
+
+            if (regionInteger < 10) {
+                region = "0" + regionInteger;
+            } else region = String.valueOf(regionInteger);
+
+            coolNumber = letter.concat(digit).concat(digit).concat(digit).concat(letter1).concat(letter2).concat(region);
+            coolNumbers.add(coolNumber);
+        }
+        return coolNumbers;
     }
 
     public static boolean bruteForceSearchInList(List<String> list, String number) {
@@ -25,5 +47,4 @@ public class CoolNumbers {
     public static boolean searchInTreeSet(TreeSet<String> treeSet, String number) {
         return false;
     }
-
 }
