@@ -43,7 +43,7 @@ public class Main {
                             phoneBook.addContact(phoneContact, nameContact);
                             System.out.printf("Контакт %s сохранён\n", nameContact);
                         } else {
-                            System.out.println("Контакт найден: " + nameContact);
+                            System.out.println("Контакт найден: " + phoneBook.getPhonesByName(nameContact).toString());
                         }
                     } else {
                         System.out.println("Неверная команда");

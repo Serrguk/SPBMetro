@@ -36,6 +36,20 @@ public class CoolNumbers {
     }
 
     public static boolean binarySearchInList(List<String> sortedList, String number) {
+        Collections.sort(sortedList);
+        int min = 0;
+        int max = sortedList.size() - 1;
+        int middle;
+        String temp;
+        while (min <= max) {
+            middle = min + max;
+            temp = sortedList.get(middle);
+            if (temp.equals(number))
+                return true;
+            if (temp.compareTo(number) > 0)
+                max = middle - 1;
+            else min = middle + 1;
+        }
         return false;
     }
 
