@@ -12,5 +12,6 @@ public class Main {
         ArrayList<String> coolNumbers = (ArrayList<String>) CoolNumbers.generateCoolNumbers();
         System.out.println(coolNumbers);
         System.out.println(CoolNumbers.binarySearchInList(coolNumbers, "А555ЕХ132"));
+
     }
 }

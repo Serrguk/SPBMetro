@@ -20,7 +20,6 @@ public class CoolNumbers {
             digit = String.valueOf((int) (Math.random() * 9));
             regionInteger = (int) (1 + Math.random() * 198);
 
-
             if (regionInteger < 10) {
                 region = "0" + regionInteger;
             } else region = String.valueOf(regionInteger);
@@ -32,6 +31,10 @@ public class CoolNumbers {
     }
 
     public static boolean bruteForceSearchInList(List<String> list, String number) {
+        for (String s : list) {
+            if (s.equals(number))
+                return true;
+        }
         return false;
     }
 
@@ -41,24 +44,39 @@ public class CoolNumbers {
         int max = sortedList.size() - 1;
         int middle;
         String temp;
+        long start = System.nanoTime();
+        long finish;
         while (min <= max) {
             middle = min + max;
             temp = sortedList.get(middle);
-            if (temp.equals(number))
+            if (temp.equals(number)) {
+                finish = System.nanoTime();
+                System.out.println("Время поиска: " + (finish - start) + " наносекунд");
                 return true;
+            }
             if (temp.compareTo(number) > 0)
                 max = middle - 1;
             else min = middle + 1;
         }
+        finish = System.nanoTime();
+        System.out.println("Время поиска: " + (finish - start) + " наносекунд");
         return false;
     }
 
 
     public static boolean searchInHashSet(HashSet<String> hashSet, String number) {
+        for (String s : hashSet) {
+            if (s.equals(number))
+                return true;
+        }
         return false;
     }
 
     public static boolean searchInTreeSet(TreeSet<String> treeSet, String number) {
+        for (String s : treeSet) {
+            if (s.equals(number))
+                return true;
+        }
         return false;
     }
 }
