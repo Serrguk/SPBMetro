@@ -10,8 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<String> coolNumbers = (ArrayList<String>) CoolNumbers.generateCoolNumbers();
-        System.out.println(coolNumbers);
-        System.out.println(CoolNumbers.binarySearchInList(coolNumbers, "А555ЕХ132"));
+
+
+        System.out.println("Бинарный поиск по списку: " + CoolNumbers.binarySearchInList(coolNumbers, "А555ЕХ132"));
+        System.out.println("Простой поиск по списку: " + CoolNumbers.bruteForceSearchInList(coolNumbers, "А555ЕХ132"));
+
 
     }
 }
