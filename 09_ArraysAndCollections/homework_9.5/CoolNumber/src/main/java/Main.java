@@ -47,6 +47,6 @@ public class Main {
         resultSearchInTreeSet = CoolNumbers.searchInTreeSet(stringTreeSet, "Х777УН22");
         long stopSearchInTreeSet = System.nanoTime();
         long leadTimeSearchInTreeSet = stopSearchInTreeSet - startSearchInTreeSet;
-        System.out.println(resultSearchInTreeSet ? "Поиск в HashSet: найден, время поиска " + leadTimeSearchInTreeSet + " нс" : "Поиск в HashSet: не найден, время поиска " + leadTimeSearchInTreeSet + " нс");
+        System.out.println(resultSearchInTreeSet ? "Поиск в TreeSet: найден, время поиска " + leadTimeSearchInTreeSet + " нс" : "Поиск в TreeSet: не найден, время поиска " + leadTimeSearchInTreeSet + " нс");
     }
 }
