@@ -31,74 +31,26 @@ public class CoolNumbers {
     }
 
     public static boolean bruteForceSearchInList(List<String> list, String number) {
-        long start = System.nanoTime();
-        long finish;
         for (String s : list) {
             if (s.equals(number)) {
-                finish = System.nanoTime();
-                System.out.println("Время поиска: " + (finish - start) + " наносекунд");
                 return true;
             }
         }
-        finish = System.nanoTime();
-        System.out.println("Время поиска: " + (finish - start) + " наносекунд");
         return false;
     }
 
     public static boolean binarySearchInList(List<String> sortedList, String number) {
         Collections.sort(sortedList);
-        int min = 0;
-        int max = sortedList.size() - 1;
-        int middle;
-        String temp;
-        long start = System.nanoTime();
-        long finish;
-        while (min <= max) {
-            middle = min + max;
-            temp = sortedList.get(middle);
-            if (temp.equals(number)) {
-                finish = System.nanoTime();
-                System.out.println("Время поиска: " + (finish - start) + " наносекунд");
-                return true;
-            }
-            if (temp.compareTo(number) > 0)
-                max = middle - 1;
-            else min = middle + 1;
-        }
-        finish = System.nanoTime();
-        System.out.println("Время поиска: " + (finish - start) + " наносекунд");
-        return false;
+        return sortedList.contains(number);
     }
 
 
     public static boolean searchInHashSet(HashSet<String> hashSet, String number) {
-        long start = System.nanoTime();
-        long finish;
-        for (String s : hashSet) {
-            if (s.equals(number)) {
-                finish = System.nanoTime();
-                System.out.println("Время поиска: " + (finish - start) + " наносекунд");
-                return true;
-            }
-        }
-        finish = System.nanoTime();
-        System.out.println("Время поиска: " + (finish - start) + " наносекунд");
-        return false;
+        return hashSet.contains(number);
     }
 
     public static boolean searchInTreeSet(TreeSet<String> treeSet, String number) {
-        long start = System.nanoTime();
-        long finish;
-        for (String s : treeSet) {
-            if (s.equals(number)) {
-                finish = System.nanoTime();
-                System.out.println("Время поиска: " + (finish - start) + " наносекунд");
-                return true;
-            }
-        }
-        finish = System.nanoTime();
-        System.out.println("Время поиска: " + (finish - start) + " наносекунд");
-        return false;
+        return treeSet.contains(number);
     }
 
 }
