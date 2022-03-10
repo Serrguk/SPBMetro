@@ -40,7 +40,6 @@ public class CoolNumbers {
     }
 
     public static boolean binarySearchInList(List<String> sortedList, String number) {
-        Collections.sort(sortedList);
         return sortedList.contains(number);
     }
 

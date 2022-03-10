@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -22,7 +23,7 @@ public class Main {
         long leadTime = stop - start;
         System.out.println(resultBruteForceSearch ? "Поиск перебором: найден, время поиска " + leadTime + " нс" : "Поиск перебором: не найден, время поиска " + leadTime + " нс");
 
-
+        Collections.sort(list); //Здесь сортируем лист?
 
         boolean resultBinarySearch;
         long startBinarySearch = System.nanoTime();
