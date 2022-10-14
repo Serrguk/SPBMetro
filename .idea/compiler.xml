@@ -16,14 +16,14 @@
         <module name="SplitText" />
         <module name="MaskingInformation" />
         <module name="TotalEarningsCalculator" />
-        <module name="Periods" />
-        <module name="FullNameFormatter" />
         <module name="TrucksContainersAndBoxes" />
+        <module name="FullNameFormatter" />
+        <module name="Periods" />
         <module name="01_sumdigits" />
         <module name="FullNameFormatterRegExp" />
         <module name="GeometryCalculator (1)" />
-        <module name="Birthdays" />
         <module name="CoolNumber" />
+        <module name="Birthdays" />
         <module name="TwoDimensionalArray" />
         <module name="BirthdayCalendar" />
         <module name="GeometryCalculator" />
