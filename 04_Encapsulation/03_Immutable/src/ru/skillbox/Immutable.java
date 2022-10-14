@@ -1,6 +1,6 @@
 package ru.skillbox;
 
-public class Main {
+public class Immutable {
 
     public static void main(String[] args) {
     }

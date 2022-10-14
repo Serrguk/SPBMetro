@@ -1,7 +1,7 @@
 package ru.skillbox;
 
-public class Main {
-
+public class Pojo {
     public static void main(String[] args) {
+        
     }
 }
