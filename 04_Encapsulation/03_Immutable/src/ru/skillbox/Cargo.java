@@ -1,12 +1,12 @@
 package ru.skillbox;
 
 public class Cargo {
-    private Dimensions dimensions;
-    private double mass;
-    private String addressDestination = "";
-    private boolean isTurn;
-    private String registrationNumber;
-    private boolean isFragile;
+    private final Dimensions dimensions;
+    private final double mass; //kg
+    private final String addressDestination;
+    private final boolean isTurn;
+    private final String registrationNumber;
+    private final boolean isFragile;
 
     public Cargo(Dimensions dimensions, double mass, String addressDestination, boolean isTurn, String registrationNumber, boolean isFragile) {
         this.dimensions = dimensions;
@@ -17,27 +17,63 @@ public class Cargo {
         this.isFragile = isFragile;
     }
 
-    public void setDimensions(Dimensions dimensions) {
-        this.dimensions = dimensions;
+    public Cargo setDimensions(Dimensions dimensions) {
+        return new Cargo(dimensions, mass, addressDestination, isTurn, registrationNumber, isFragile);
     }
 
-    public void setMass(double mass) {
-        this.mass = mass;
+    public Cargo setMass(double mass) {
+        return new Cargo(dimensions, mass, addressDestination, isTurn, registrationNumber, isFragile);
     }
 
-    public void setAddressDestination(String addressDestination) {
-        this.addressDestination = addressDestination;
+    public Cargo setAddressDestination(String addressDestination) {
+        return new Cargo(dimensions, mass, addressDestination, isTurn, registrationNumber, isFragile);
     }
 
-    public void setTurn(boolean turn) {
-        isTurn = turn;
+    public Cargo setTurn(boolean turn) {
+        return new Cargo(dimensions, mass, addressDestination, turn, registrationNumber, isFragile);
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+    public Cargo setRegistrationNumber(String registrationNumber) {
+        return new Cargo(dimensions, mass, addressDestination, isTurn, registrationNumber, isFragile);
     }
 
-    public void setFragile(boolean fragile) {
-        isFragile = fragile;
+    public Cargo setFragile(boolean fragile) {
+        return new Cargo(dimensions, mass, addressDestination, isTurn, registrationNumber, fragile);
+    }
+
+    public Dimensions getDimensions() {
+        return dimensions;
+    }
+
+    public double getMass() {
+        return mass;
+    }
+
+    public String getAddressDestination() {
+        return addressDestination;
+    }
+
+    public boolean isTurn() {
+        return isTurn;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public boolean isFragile() {
+        return isFragile;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "dimensions volume=" + dimensions.getVolumeCargo() +
+                " m^3, mass=" + mass +
+                " kg, addressDestination='" + addressDestination + '\'' +
+                ", isTurn=" + isTurn +
+                ", registrationNumber='" + registrationNumber + '\'' +
+                ", isFragile=" + isFragile +
+                '}';
     }
 }

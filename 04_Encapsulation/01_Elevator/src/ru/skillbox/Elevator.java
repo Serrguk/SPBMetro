@@ -22,7 +22,7 @@ public class Elevator {
         currentFloor++;
     }
 
-    public void move(int floor) {
+    public void move(int floor) throws InterruptedException {
         if (floor < minFloor || floor > maxFloor) {
             System.out.println("Данного этажа в здании нет.\n" +
                     "Лифт двигается в пределах от " + minFloor + " до " + maxFloor + " этажа.");
@@ -30,12 +30,14 @@ public class Elevator {
             System.out.println("Вы уже на этаже " + currentFloor);
         } else if (floor > getCurrentFloor()) {
             while (floor > getCurrentFloor()) {
+                Thread.sleep(500);
                 floorUp();
                 System.out.println("Этаж номер " + getCurrentFloor());
             }
             System.out.println("Вы прибыли на этаж номер " + getCurrentFloor());
         } else {
             while (floor < getCurrentFloor()) {
+                Thread.sleep(500);
                 floorDown();
                 System.out.println("Этаж номер " + getCurrentFloor());
             }
