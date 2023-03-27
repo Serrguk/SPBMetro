@@ -8,12 +8,15 @@ public class Main {
          */
 
         Company google = new Company(500_000_000D);
-        google.hire(new TopManager("Ivan Petrov", 500_000D, google));
+        TopManager ivanPetrov = new TopManager("Иван Петров", 300_000, google);
+        google.hire(ivanPetrov);
 
         System.out.println(google.getIncome());
         System.out.println(google.showStaff());
 
         google.hire(new Manager("Тото Кутуньо", 35000, google));
+        System.out.println(google.showStaff());
+        google.fire(ivanPetrov);
         System.out.println(google.showStaff());
 
     }
