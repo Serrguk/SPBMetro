@@ -27,15 +27,15 @@ public abstract class Employees implements Employee {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
     @Override
     public String toString() {
-        return "Employee: {"  + getClass() + ": " +
+        return "Employees{" +
                 "name='" + name + '\'' +
                 ", salary=" + salary +
-                "}\n";
+                '}';
     }
 }

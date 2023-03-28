@@ -4,7 +4,7 @@ public class Operator extends Employees {
     }
 
     @Override
-    public int getMonthSalary() {
-        return 0;
+    public double getMonthSalary() {
+        return getSalary();
     }
 }
