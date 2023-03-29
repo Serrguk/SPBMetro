@@ -3,7 +3,7 @@ import java.util.Collection;
 
 public class Company {
     private double income;
-    ArrayList<Employee> staff;
+    private final ArrayList<Employee> staff;
 
     public Company(double income) {
         this.income = income;
@@ -22,11 +22,11 @@ public class Company {
         staff.add(employee);
     }
 
-    public void hireAll(Collection<Employee> employees) {
+    public void hireAll(Collection<Employee> employees, int count) {
         //сгенерировать найм нескольких сотрудников
     }
 
-    public ArrayList<Employee> showStaff() {
+    public ArrayList<Employee> getStaff() {
         return staff;
     }
 

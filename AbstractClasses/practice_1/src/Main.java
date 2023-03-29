@@ -6,12 +6,15 @@ public class Main {
         google.hire(ivanPetrov);
 
         System.out.println(google.getIncome());
-        System.out.println(google.showStaff());
+        System.out.println(google.getStaff());
 
         google.hire(new Manager("Тото Кутуньо", 35000, google));
-        System.out.println(google.showStaff());
+        System.out.println(google.getStaff());
         Manager manager = new Manager("R2D2", 120_000, google);
-        System.out.println(manager.getIncomeForCompany());
+        System.out.println("R2D2 заработал для компании " + manager.getIncomeForCompany() + " рублей.");
+        manager.setIncomeForCompany();
+        System.out.println("R2D2 заработал для компании " + manager.getIncomeForCompany() + " рублей.");
+
         System.out.println(manager.getMonthSalary());
         System.out.println();
         TopManager top = new TopManager("Big man", 350_000, google);
