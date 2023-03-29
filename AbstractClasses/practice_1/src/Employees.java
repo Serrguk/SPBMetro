@@ -1,13 +1,14 @@
 public abstract class Employees implements Employee {
 
     private Company company;
-    private final String name;
+    private String name;
     private double salary;
 
-    public Employees(String name, double salary, Company company) {
-        this.name = name;
-        this.salary = salary;
+    public Employees(Company company) {
         this.company = company;
+        this.name = null;
+        this.salary = 0;
+
     }
 
     public Company getCompany() {
@@ -26,7 +27,11 @@ public abstract class Employees implements Employee {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
@@ -34,7 +39,7 @@ public abstract class Employees implements Employee {
     public String toString() {
         return "Employees{" +
                 "name='" + name + '\'' +
-                ", salary=" + salary +
+                ", salary=" + Math.round(salary) +
                 '}';
     }
 }

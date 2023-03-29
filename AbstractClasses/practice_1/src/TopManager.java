@@ -1,10 +1,10 @@
 public class TopManager extends Employees {
 
     private final double companyIncome;
-    public TopManager(String name, double salary, Company company) {
-        super(name, salary, company);
+    private Company company;
+    public TopManager(Company company) {
+        super(company);
         companyIncome = company.getIncome();
-
     }
 
     @Override

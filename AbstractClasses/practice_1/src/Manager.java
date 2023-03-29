@@ -1,8 +1,8 @@
 public class Manager extends Employees {
 
     private double incomeForCompany;
-    public Manager(String name, double salary, Company company) {
-        super(name, salary, company);
+    public Manager(Company company) {
+        super(company);
         setIncomeForCompany();
     }
 
@@ -18,4 +18,5 @@ public class Manager extends Employees {
     public void setIncomeForCompany() {
         incomeForCompany = Math.round(115000 + (140000 - 115000) * Math.random());
     }
+
 }
