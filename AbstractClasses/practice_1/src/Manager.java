@@ -3,7 +3,7 @@ public class Manager extends Employees {
     private double incomeForCompany;
     public Manager(String name, double salary, Company company) {
         super(name, salary, company);
-        incomeForCompany = 115000 + (140000 - 115000) * Math.random();
+        setIncomeForCompany();
     }
 
     @Override
@@ -12,10 +12,10 @@ public class Manager extends Employees {
     }
 
     public double getIncomeForCompany() {
-        return Math.round(incomeForCompany);
+        return incomeForCompany;
     }
 
     public void setIncomeForCompany() {
-        this.incomeForCompany = 115000 + (140000 - 115000) * Math.random();
+        incomeForCompany = Math.round(115000 + (140000 - 115000) * Math.random());
     }
 }

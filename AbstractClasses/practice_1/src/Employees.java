@@ -1,7 +1,6 @@
 public abstract class Employees implements Employee {
 
     private Company company;
-
     private final String name;
     private double salary;
 
