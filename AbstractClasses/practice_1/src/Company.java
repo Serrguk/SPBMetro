@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Company {
     private double income;
@@ -60,20 +62,17 @@ public class Company {
         countEmployees--;
     }
 
-    public ArrayList<Employee> getTopSalaryStaff(int count) {
-        staff.sort(Comparator.comparingDouble(Employee::getMonthSalary));
-        ArrayList<Employee> employeesWithTopSalary = new ArrayList<>();
-        for (int i = staff.size() - 1; i >= staff.size() - count; i--) {
-            employeesWithTopSalary.add(staff.get(i));
-        }
-        return employeesWithTopSalary;
+    public List<Employee> getTopSalaryStaff(int count) {
+        return staff.stream()
+                .sorted(Comparator.comparingDouble(Employee::getMonthSalary).reversed())
+                .limit(count)
+                .collect(Collectors.toList());
     }
-    public ArrayList<Employee> getLowesSalaryStaff (int count){
-        staff.sort(Comparator.comparingDouble(Employee::getMonthSalary));
-        ArrayList<Employee> employeesWithLowesSalary = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            employeesWithLowesSalary.add(staff.get(i));
-        }
-        return employeesWithLowesSalary;
+
+    public List<Employee> getLowesSalaryStaff(int count) {
+        return staff.stream()
+                .sorted(Comparator.comparingDouble(Employee::getMonthSalary))
+                .limit(count)
+                .collect(Collectors.toList());
     }
 }
