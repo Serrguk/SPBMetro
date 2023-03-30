@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Company {
     private double income;
@@ -32,25 +33,29 @@ public class Company {
     }
 
     public void hireAll(Collection<Employee> employees, Employee employee, int count) {
-        for (int i = 0; i < count; i++) {
-            if (employee instanceof TopManager) {
-                TopManager manager = new TopManager(((TopManager) employee).getCompany());
-                manager.setName("TopManager" + countEmployees);
-                manager.setSalary(250_000 + (350_000 - 250_000) * Math.random());
-                employees.add(manager);
-            } else if (employee instanceof Manager) {
-                Manager manager = new Manager(((Manager) employee).getCompany());
-                manager.setName("Manager" + countEmployees);
-                manager.setSalary(100_000 + (150_000 - 100_000) * Math.random());
-                employees.add(manager);
-            } else if (employee instanceof Operator) {
-                Operator operator = new Operator(((Operator) employee).getCompany());
-                operator.setName("Operator" + countEmployees);
-                operator.setSalary(35_000);
-                employees.add(operator);
+        IntStream.range(0, count).forEach(i -> {
+            switch (employee.getClass().getSimpleName()) {
+                case "TopManager" -> {
+                    TopManager topManager = new TopManager(((TopManager) employee).getCompany());
+                    topManager.setName("TopManager" + countEmployees);
+                    topManager.setSalary(250_000 + (350_000 - 250_000) * Math.random());
+                    employees.add(topManager);
+                }
+                case "Manager" -> {
+                    Manager manager = new Manager(((Manager) employee).getCompany());
+                    manager.setName("Manager" + countEmployees);
+                    manager.setSalary(100_000 + (150_000 - 100_000) * Math.random());
+                    employees.add(manager);
+                }
+                case "Operator" -> {
+                    Operator operator = new Operator(((Operator) employee).getCompany());
+                    operator.setName("Operator" + countEmployees);
+                    operator.setSalary(35_000);
+                    employees.add(operator);
+                }
             }
             countEmployees++;
-        }
+        });
     }
 
     public ArrayList<Employee> getStaff() {

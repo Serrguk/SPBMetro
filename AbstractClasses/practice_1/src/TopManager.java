@@ -1,7 +1,6 @@
 public class TopManager extends Employees {
 
     private final double companyIncome;
-    private Company company;
     public TopManager(Company company) {
         super(company);
         companyIncome = company.getIncome();
@@ -10,9 +9,9 @@ public class TopManager extends Employees {
     @Override
     public double getMonthSalary() {
         if (companyIncome > 1E7) {
-            return getSalary() + getSalary() * 1.5;
+            return Math.round(getSalary() + getSalary() * 1.5);
         } else {
-            return getSalary();
+            return  Math.round(getSalary());
         }
     }
 }

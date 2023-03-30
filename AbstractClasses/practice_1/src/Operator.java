@@ -7,6 +7,6 @@ public class Operator extends Employees {
 
     @Override
     public double getMonthSalary() {
-        return getSalary();
+        return Math.round(getSalary());
     }
 }
