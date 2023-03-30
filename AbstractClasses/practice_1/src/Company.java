@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class Company {
     private double income;
@@ -48,7 +49,6 @@ public class Company {
             }
             countEmployees++;
         }
-        //сгенерировать найм нескольких сотрудников
     }
 
     public ArrayList<Employee> getStaff() {
@@ -61,10 +61,19 @@ public class Company {
     }
 
     public ArrayList<Employee> getTopSalaryStaff(int count) {
-        return null;
+        staff.sort(Comparator.comparingDouble(Employee::getMonthSalary));
+        ArrayList<Employee> employeesWithTopSalary = new ArrayList<>();
+        for (int i = staff.size() - 1; i >= staff.size() - count; i--) {
+            employeesWithTopSalary.add(staff.get(i));
+        }
+        return employeesWithTopSalary;
     }
-
-    public ArrayList<Employee> getLowesSalaryStaff(int count) {
-        return null;
+    public ArrayList<Employee> getLowesSalaryStaff (int count){
+        staff.sort(Comparator.comparingDouble(Employee::getMonthSalary));
+        ArrayList<Employee> employeesWithLowesSalary = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            employeesWithLowesSalary.add(staff.get(i));
+        }
+        return employeesWithLowesSalary;
     }
 }

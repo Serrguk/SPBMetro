@@ -5,8 +5,11 @@ public class Main {
 
         google.hireAll(google.getStaff(), new Manager(google), 80);
 
-        google.hireAll(google.getStaff(), new TopManager(), 5);
-        System.out.println(google.getStaff());
+        google.hireAll(google.getStaff(), new TopManager(google), 5);
+
+        System.out.println(google.getTopSalaryStaff(10));
+        System.out.println();
+        System.out.println(google.getLowesSalaryStaff(10));
 
     }
 }
