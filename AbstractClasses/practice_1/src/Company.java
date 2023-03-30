@@ -22,7 +22,12 @@ public class Company {
         staff.add(employee);
     }
 
-    public void hireAll(Collection<Employee> employees, int count) {
+    public void hireAll(Collection<Employee> employees, Employee employee, int count) {
+        if (employee instanceof TopManager) {
+            TopManager manager = new TopManager();
+            manager.setSalary(250000);
+            employees.add(manager);
+        }
         //сгенерировать найм нескольких сотрудников
     }
 

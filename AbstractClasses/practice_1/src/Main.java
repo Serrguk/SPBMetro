@@ -20,5 +20,8 @@ public class Main {
         TopManager top = new TopManager("Big man", 350_000, google);
         System.out.println(top.getMonthSalary());
 
+        google.hireAll(google.getStaff(), new TopManager(), 5);
+        System.out.println(google.getStaff());
+
     }
 }

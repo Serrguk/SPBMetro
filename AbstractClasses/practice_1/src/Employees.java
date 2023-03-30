@@ -1,13 +1,16 @@
 public abstract class Employees implements Employee {
 
     private Company company;
-    private final String name;
+    private String name;
     private double salary;
 
     public Employees(String name, double salary, Company company) {
         this.name = name;
         this.salary = salary;
         this.company = company;
+    }
+
+    public Employees() {
     }
 
     public Company getCompany() {
