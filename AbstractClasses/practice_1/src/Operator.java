@@ -1,4 +1,4 @@
-public class Operator extends Employees {
+public class Operator extends BaseEmployee {
 
 
     public Operator(Company company) {

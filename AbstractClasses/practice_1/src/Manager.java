@@ -1,4 +1,4 @@
-public class Manager extends Employees {
+public class Manager extends BaseEmployee {
 
     private double incomeForCompany;
     public Manager(Company company) {
@@ -9,10 +9,6 @@ public class Manager extends Employees {
     @Override
     public double getMonthSalary() {
         return Math.round(getSalary() + incomeForCompany * 0.05);
-    }
-
-    public double getIncomeForCompany() {
-        return incomeForCompany;
     }
 
     public void setIncomeForCompany() {

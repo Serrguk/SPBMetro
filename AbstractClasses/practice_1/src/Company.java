@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -50,7 +48,7 @@ public class Company {
                 case "Operator" -> {
                     Operator operator = new Operator(((Operator) employee).getCompany());
                     operator.setName("Operator" + countEmployees);
-                    operator.setSalary(35_000);
+                    operator.setSalary(35_000 + 5000 * Math.random());
                     employees.add(operator);
                 }
             }
@@ -65,6 +63,26 @@ public class Company {
     public void fire(Employee employee) {
         staff.remove(employee);
         countEmployees--;
+    }
+
+    //Метод для массового сокращения штата в трудные времена
+    public void fireAll(Collection<Employee> employees, int count) {
+        List<Employee> list = new ArrayList<>(employees);
+        AtomicInteger size = new AtomicInteger(list.size());
+        if (count > size.get()) {
+            System.out.println("В компании всего " + size + " работников!");
+        } else {
+            Random random = new Random();
+            IntStream.range(0, count)
+                    .forEach(i -> {
+                        int index = random.nextInt(size.get());
+                        list.remove(index);
+                        size.getAndDecrement();
+                    });
+            employees.clear();
+            employees.addAll(list);
+            countEmployees = employees.size();
+        }
     }
 
     public List<Employee> getTopSalaryStaff(int count) {

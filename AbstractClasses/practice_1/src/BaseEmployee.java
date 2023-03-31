@@ -1,17 +1,14 @@
-public abstract class Employees implements Employee {
+public abstract class BaseEmployee implements Employee {
 
     private Company company;
     private String name;
     private double salary;
 
-    public Employees(Company company) {
+    public BaseEmployee(Company company) {
         this.company = company;
         this.name = null;
         this.salary = 0;
 
-    }
-
-    public Employees() {
     }
 
     public Company getCompany() {

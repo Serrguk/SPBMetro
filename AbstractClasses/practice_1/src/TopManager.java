@@ -1,4 +1,4 @@
-public class TopManager extends Employees {
+public class TopManager extends BaseEmployee {
 
     private final double companyIncome;
     public TopManager(Company company) {
