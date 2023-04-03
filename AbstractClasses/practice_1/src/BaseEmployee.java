@@ -1,6 +1,6 @@
 public abstract class BaseEmployee implements Employee {
 
-    private Company company;
+    private final Company company;
     private String name;
     private double salary;
 
@@ -13,14 +13,6 @@ public abstract class BaseEmployee implements Employee {
 
     public Company getCompany() {
         return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public double getSalary() {

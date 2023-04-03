@@ -1,15 +1,12 @@
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Company {
-    private double income;
-    private final ArrayList<Employee> staff;
+    private final List<Employee> staff;
     private int countEmployees = 0;
 
-    public Company(double income) {
-        this.income = income;
+    public Company() {
         staff = new ArrayList<>();
     }
 
@@ -18,11 +15,13 @@ public class Company {
     }
 
     public double getIncome() {
+        int income = 0;
+        for (Employee e: staff) {
+            if (e instanceof Manager) {
+               income += ((Manager) e).getIncomeForCompany();
+            }
+        }
         return income;
-    }
-
-    public void setIncome(double income) {
-        this.income = income;
     }
 
     public void hire(Employee employee) {
@@ -30,34 +29,34 @@ public class Company {
         countEmployees++;
     }
 
-    public void hireAll(Collection<Employee> employees, Employee employee, int count) {
+    public void hireAll(Employee employee, int count) {
         IntStream.range(0, count).forEach(i -> {
             switch (employee.getClass().getSimpleName()) {
                 case "TopManager" -> {
                     TopManager topManager = new TopManager(((TopManager) employee).getCompany());
                     topManager.setName("TopManager" + countEmployees);
                     topManager.setSalary(250_000 + (350_000 - 250_000) * Math.random());
-                    employees.add(topManager);
+                    staff.add(topManager);
                 }
                 case "Manager" -> {
                     Manager manager = new Manager(((Manager) employee).getCompany());
                     manager.setName("Manager" + countEmployees);
                     manager.setSalary(100_000 + (150_000 - 100_000) * Math.random());
-                    employees.add(manager);
+                    staff.add(manager);
                 }
                 case "Operator" -> {
                     Operator operator = new Operator(((Operator) employee).getCompany());
                     operator.setName("Operator" + countEmployees);
                     operator.setSalary(35_000 + 5000 * Math.random());
-                    employees.add(operator);
+                    staff.add(operator);
                 }
             }
             countEmployees++;
         });
     }
 
-    public ArrayList<Employee> getStaff() {
-        return staff;
+    public List<Employee> getStaff() {
+        return new ArrayList<>(staff);
     }
 
     public void fire(Employee employee) {
@@ -66,8 +65,8 @@ public class Company {
     }
 
     //Метод для массового сокращения штата в трудные времена
-    public void fireAll(Collection<Employee> employees, int count) {
-        List<Employee> list = new ArrayList<>(employees);
+    public void fireAll(int count) {
+        List<Employee> list = new ArrayList<>(staff);
         AtomicInteger size = new AtomicInteger(list.size());
         if (count > size.get()) {
             System.out.println("В компании всего " + size + " работников!");
@@ -79,23 +78,20 @@ public class Company {
                         list.remove(index);
                         size.getAndDecrement();
                     });
-            employees.clear();
-            employees.addAll(list);
-            countEmployees = employees.size();
+            staff.clear();
+            staff.addAll(list);
+            countEmployees = staff.size();
         }
     }
 
     public List<Employee> getTopSalaryStaff(int count) {
-        return staff.stream()
-                .sorted(Comparator.comparingDouble(Employee::getMonthSalary).reversed())
-                .limit(count)
-                .collect(Collectors.toList());
+        Collections.sort(staff);
+        Collections.reverse(staff);
+        return staff.subList(0, count);
     }
 
     public List<Employee> getLowesSalaryStaff(int count) {
-        return staff.stream()
-                .sorted(Comparator.comparingDouble(Employee::getMonthSalary))
-                .limit(count)
-                .collect(Collectors.toList());
+        Collections.sort(staff);
+        return staff.subList(0, count);
     }
 }
