@@ -1,8 +1,8 @@
 public class Operator extends BaseEmployee {
 
 
-    public Operator(Company company) {
-        super(company);
+    public Operator() {
+        super();
     }
 
     @Override

@@ -1,8 +1,9 @@
 public class TopManager extends BaseEmployee {
 
     private final double companyIncome;
+
     public TopManager(Company company) {
-        super(company);
+        super();
         companyIncome = company.getIncome();
     }
 
@@ -11,7 +12,8 @@ public class TopManager extends BaseEmployee {
         if (companyIncome > 1E7) {
             return Math.round(getSalary() + getSalary() * 1.5);
         } else {
-            return  Math.round(getSalary());
+            return Math.round(getSalary());
         }
     }
+
 }

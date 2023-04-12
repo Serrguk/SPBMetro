@@ -16,43 +16,42 @@ public class Company {
 
     public double getIncome() {
         int income = 0;
-        for (Employee e: staff) {
+        for (Employee e : staff) {
             if (e instanceof Manager) {
-               income += ((Manager) e).getIncomeForCompany();
+                income += ((Manager) e).getIncomeForCompany();
             }
         }
         return income;
     }
 
     public void hire(Employee employee) {
-        staff.add(employee);
+        switch (employee.getClass().getSimpleName()) {
+            case "TopManager" -> {
+                TopManager topManager = new TopManager(this);
+                topManager.setName("TopManager" + countEmployees);
+                topManager.setSalary(250_000 + (350_000 - 250_000) * Math.random());
+                staff.add(topManager);
+            }
+            case "Manager" -> {
+                Manager manager = new Manager();
+                manager.setName("Manager" + countEmployees);
+                manager.setSalary(100_000 + (150_000 - 100_000) * Math.random());
+                manager.setCompany(this);
+                staff.add(manager);
+            }
+            case "Operator" -> {
+                Operator operator = new Operator();
+                operator.setName("Operator" + countEmployees);
+                operator.setSalary(35_000 + 5000 * Math.random());
+                operator.setCompany(this);
+                staff.add(operator);
+            }
+        }
         countEmployees++;
     }
 
     public void hireAll(Employee employee, int count) {
-        IntStream.range(0, count).forEach(i -> {
-            switch (employee.getClass().getSimpleName()) {
-                case "TopManager" -> {
-                    TopManager topManager = new TopManager(((TopManager) employee).getCompany());
-                    topManager.setName("TopManager" + countEmployees);
-                    topManager.setSalary(250_000 + (350_000 - 250_000) * Math.random());
-                    staff.add(topManager);
-                }
-                case "Manager" -> {
-                    Manager manager = new Manager(((Manager) employee).getCompany());
-                    manager.setName("Manager" + countEmployees);
-                    manager.setSalary(100_000 + (150_000 - 100_000) * Math.random());
-                    staff.add(manager);
-                }
-                case "Operator" -> {
-                    Operator operator = new Operator(((Operator) employee).getCompany());
-                    operator.setName("Operator" + countEmployees);
-                    operator.setSalary(35_000 + 5000 * Math.random());
-                    staff.add(operator);
-                }
-            }
-            countEmployees++;
-        });
+        IntStream.range(0, count).forEach(i -> hire(employee));
     }
 
     public List<Employee> getStaff() {
@@ -61,6 +60,7 @@ public class Company {
 
     public void fire(Employee employee) {
         staff.remove(employee);
+        employee.setCompany(null);
         countEmployees--;
     }
 
@@ -75,6 +75,7 @@ public class Company {
             IntStream.range(0, count)
                     .forEach(i -> {
                         int index = random.nextInt(size.get());
+                        list.get(index).setCompany(null);
                         list.remove(index);
                         size.getAndDecrement();
                     });
@@ -85,13 +86,22 @@ public class Company {
     }
 
     public List<Employee> getTopSalaryStaff(int count) {
-        Collections.sort(staff);
-        Collections.reverse(staff);
-        return staff.subList(0, count);
+        return getList(count, Comparator.reverseOrder());
     }
 
     public List<Employee> getLowesSalaryStaff(int count) {
-        Collections.sort(staff);
-        return staff.subList(0, count);
+        return getList(count, Employee::compareTo);
+    }
+
+    private List<Employee> getList(int count, Comparator<Employee> comparator) {
+        if (count < 0) {
+            System.out.println("Передано неверное значение!");
+            return Collections.emptyList();
+        }
+        if (count > staff.size()) {
+            count = staff.size();
+        }
+        staff.sort(comparator);
+        return new ArrayList<>(staff.subList(0, count));
     }
 }

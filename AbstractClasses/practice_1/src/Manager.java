@@ -1,8 +1,9 @@
 public class Manager extends BaseEmployee {
 
     private double incomeForCompany;
-    public Manager(Company company) {
-        super(company);
+
+    public Manager() {
+        super();
         setIncomeForCompany();
     }
 
