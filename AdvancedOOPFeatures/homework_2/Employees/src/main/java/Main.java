@@ -1,8 +1,9 @@
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
 
-    private static final String STAFF_TXT = "data/staff.txt";
+    private static final String STAFF_TXT = "C:\\Users\\User\\java_basics\\AdvancedOOPFeatures\\homework_1\\data\\staff.txt";
 
     public static void main(String[] args) {
         List<Employee> staff = Employee.loadStaffFromFile(STAFF_TXT);
@@ -11,8 +12,7 @@ public class Main {
     }
 
     public static Employee findEmployeeWithHighestSalary(List<Employee> staff, int year) {
-        //TODO Метод должен вернуть сотрудника с максимальной зарплатой среди тех,
-        // кто пришёл в году, указанном в переменной year
-        return null;
+        return staff.stream().filter((employee) -> employee.getWorkStart().getYear() == year)
+                .max(Comparator.comparing(Employee::getSalary)).orElse(null);
     }
 }
