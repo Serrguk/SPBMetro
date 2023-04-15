@@ -21,5 +21,4 @@ public class Main {
                         && flight.getDate().before(twoHoursLater))
                 .toList();
     }
-
 }
