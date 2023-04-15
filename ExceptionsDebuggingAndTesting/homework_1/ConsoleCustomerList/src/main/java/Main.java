@@ -14,17 +14,25 @@ public class Main {
         CustomerStorage executor = new CustomerStorage();
 
         while (true) {
-            String command = scanner.nextLine();
-            String[] tokens = command.split("\\s+", 2);
+            try {
+                String command = scanner.nextLine();
+                String[] tokens = command.split("\\s+", 2);
 
-            switch (tokens[0]) {
-                case "add" -> executor.addCustomer(tokens[1]);
-                case "list" -> executor.listCustomers();
-                case "remove" -> executor.removeCustomer(tokens[1]);
-                case "count" -> System.out.println("There are " + executor.getCount() + " customers");
-                case "help" -> System.out.println(helpText);
-                default -> System.out.println(COMMAND_ERROR);
+                switch (tokens[0]) {
+                    case "add" -> executor.addCustomer(tokens[1]);
+                    case "list" -> executor.listCustomers();
+                    case "remove" -> executor.removeCustomer(tokens[1]);
+                    case "count" -> System.out.println("There are " + executor.getCount() + " customers");
+                    case "help" -> System.out.println(helpText);
+                    default -> System.out.println(COMMAND_ERROR);
+                }
+            } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+                System.out.println("Wrong format! Correct format example: add Василий Петров " +
+                        "vasily.petrov@gmail.com +79215637722");
+            } catch (WrongFormatPhoneException ex) {
+                System.out.println(ex.getMessage());
             }
         }
     }
 }
+
