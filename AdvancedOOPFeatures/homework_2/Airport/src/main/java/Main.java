@@ -16,7 +16,7 @@ public class Main {
 
         return airport.getTerminals().stream()
                 .flatMap(terminal -> terminal.getFlights().stream())
-                .filter(flight -> flight.getType() == Flight.Type.DEPARTURE
+                .filter(flight -> flight.getType().equals(Flight.Type.DEPARTURE)
                         && flight.getDate().after(now)
                         && flight.getDate().before(twoHoursLater))
                 .toList();
