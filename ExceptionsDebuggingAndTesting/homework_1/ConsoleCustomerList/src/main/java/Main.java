@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    private static Logger logger;
     private static final String ADD_COMMAND = "add Василий Петров " +
             "vasily.petrov@gmail.com +79215637722";
     private static final String COMMAND_EXAMPLES = "\t" + ADD_COMMAND + "\n" +
@@ -18,7 +17,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CustomerStorage executor = new CustomerStorage();
-        logger = LogManager.getRootLogger();
+
+        Logger loggerErrors = LogManager.getRootLogger();
+        Logger loggerInfo = LogManager.getRootLogger();
 
         while (true) {
 
@@ -39,14 +40,15 @@ public class Main {
             } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
                 System.out.println("Wrong format! Correct format example: add Василий Петров " +
                         "vasily.petrov@gmail.com +79215637722");
-                logger.info("Неверный формат данных: " + Arrays.toString(tokens));
+                loggerErrors.error("Неверный формат данных: " + Arrays.toString(tokens));
             } catch (EmailFormatException ex) {
                 System.out.println(ex.getMessage());
-                logger.info("Неверный email: " + Arrays.toString(tokens));
+                loggerErrors.error("Неверный email: " + Arrays.toString(tokens));
             } catch (PhoneNumberFormatException ex) {
                 System.out.println(ex.getMessage());
-                logger.info("Неверный формат номера телефона: " + Arrays.toString(tokens));
+                loggerErrors.error("Неверный формат номера телефона: " + Arrays.toString(tokens));
             }
+            loggerInfo.info("Запрос: " + command);
         }
     }
 }

@@ -5,14 +5,19 @@
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <File name="MyFile" fileName="logs/app.log" immediateFlush="true">
+        <File name="MyFile" fileName="logs/errors.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="MyFile1" fileName="logs/queries.log" immediateFlush="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
 
     </appenders>
     <loggers>
-        <root level = "debug">
-                <appender-ref ref="MyFile" level="info"/>
+        <root level="debug">
+            <appender-ref ref="MyFile" level="error"/>
+            <appender-ref ref="MyFile1" level="info"/>
         </root>
+
     </loggers>
 </configuration>

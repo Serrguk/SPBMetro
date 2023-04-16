@@ -1,0 +1,6 @@
+
+2023-04-17 00:02:49.977 [main] ERROR  - Неверный формат данных: [add, vasya]
+2023-04-17 00:03:36.705 [main] ERROR  - Неверный email: [add, vas pupkin vfal@mail.co 1234567890]
+2023-04-17 00:04:12.352 [main] ERROR  - Неверный формат номера телефона: [add, vas pupkin vfal@mail.com +1234567]
+2023-04-17 00:04:39.601 [main] ERROR  - Неверный формат данных: [add, petya loh pet@vfa. ru 645s]
+2023-04-17 00:04:54.074 [main] ERROR  - Неверный формат номера телефона: [add, petya loh pet@vfa.ru 645s]

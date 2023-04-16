@@ -18,11 +18,11 @@ public class CustomerStorage {
         if (components.length != 4) {
             throw new IllegalArgumentException();
         }
-        if (!checkPhoneNumber(components[3])) {
-            throw new PhoneNumberFormatException("Wrong format number phone!");
-        }
         if (!checkEmail(components[2])) {
             throw new EmailFormatException("Wrong format email!");
+        }
+        if (!checkPhoneNumber(components[3])) {
+            throw new PhoneNumberFormatException("Wrong format number phone!");
         }
         String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
         storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
