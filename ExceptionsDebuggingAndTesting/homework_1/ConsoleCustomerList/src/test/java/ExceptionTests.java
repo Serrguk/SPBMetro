@@ -54,7 +54,7 @@ public class ExceptionTests {
 
     @Test
     @DisplayName("Тест добавления корректных данных Customer")
-    void insertCorrectData() {
+    void insertCorrectData() throws EmailFormatException, PhoneNumberFormatException {
         final String name = "Василий Петров";
         final String email = "hello@skillbox.ru";
         final String phone = "+79991234567";
@@ -64,8 +64,8 @@ public class ExceptionTests {
         assertEquals(1, storage.getCount());
 
         Customer customer = storage.getCustomer(name);
-        assertEquals(name, customer.getName());
-        assertEquals(email, customer.getEmail());
-        assertEquals(phone, customer.getPhone());
+        assertEquals(name, customer.name());
+        assertEquals(email, customer.email());
+        assertEquals(phone, customer.phone());
     }
 }

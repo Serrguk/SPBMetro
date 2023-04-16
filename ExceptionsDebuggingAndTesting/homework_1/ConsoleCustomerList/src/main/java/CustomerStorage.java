@@ -8,7 +8,7 @@ public class CustomerStorage {
         storage = new HashMap<>();
     }
 
-    public void addCustomer(String data) throws WrongFormatPhoneException {
+    public void addCustomer(String data) throws PhoneNumberFormatException, EmailFormatException {
         final int INDEX_NAME = 0;
         final int INDEX_SURNAME = 1;
         final int INDEX_EMAIL = 2;
@@ -19,7 +19,10 @@ public class CustomerStorage {
             throw new IllegalArgumentException();
         }
         if (!checkPhoneNumber(components[3])) {
-            throw new WrongFormatPhoneException("Wrong format number phone!");
+            throw new PhoneNumberFormatException("Wrong format number phone!");
+        }
+        if (!checkEmail(components[2])) {
+            throw new EmailFormatException("Wrong format email!");
         }
         String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
         storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
@@ -46,5 +49,8 @@ public class CustomerStorage {
                 && number.length() <= 12
                 && number.length() >= 10
                 && (number.length() != 12 || number.charAt(0) == '+');
+    }
+    private boolean checkEmail(String email) {
+        return email.matches("[a-z]+@[a-z]+.com|[a-z]+@[a-z]+.ru");
     }
 }
