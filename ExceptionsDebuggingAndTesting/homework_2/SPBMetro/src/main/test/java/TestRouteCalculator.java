@@ -19,7 +19,7 @@ public class TestRouteCalculator extends TestCase {
 
     }
 
-    public void testCalculateDuration() {
+    public void testCalculateDuration() throws Exception {
         double actual = RouteCalculator.calculateDuration(route);
         double expected = 8.5;
         assertEquals(expected, actual);

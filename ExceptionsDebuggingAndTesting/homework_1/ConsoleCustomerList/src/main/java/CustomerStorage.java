@@ -51,6 +51,6 @@ public class CustomerStorage {
                 && (number.length() != 12 || number.charAt(0) == '+');
     }
     private boolean checkEmail(String email) {
-        return email.matches("[a-z]+.?@[a-z]+.com|[a-z]+@[a-z]+.ru");
+        return email.matches("[a-z]+\\.?[a-z]+@[a-z]+\\.(com|ru)");
     }
 }

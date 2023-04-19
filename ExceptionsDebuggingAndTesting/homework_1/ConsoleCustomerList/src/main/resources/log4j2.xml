@@ -18,9 +18,11 @@
         </File>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <Root level="error">
             <AppenderRef ref="fileError"/>
-            <AppenderRef ref="fileInfo"/>
         </Root>
+        <Logger name="Main" level="info">
+        <AppenderRef ref="fileInfo"/>
+        </Logger>
     </Loggers>
 </Configuration>

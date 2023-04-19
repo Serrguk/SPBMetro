@@ -21,11 +21,11 @@ public class Main {
         CustomerStorage executor = new CustomerStorage();
 
         Logger loggerErrors = LogManager.getRootLogger();
+        Logger loggerInfo = LogManager.getLogger();
         Marker markerError = MarkerManager.getMarker("ERROR");
         Marker markerInfo = MarkerManager.getMarker("INFO");
 
         while (true) {
-
             String command = scanner.nextLine();
             String[] tokens = command.split("\\s+", 2);
             try {
@@ -51,7 +51,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 loggerErrors.error(markerError, "Неверный формат номера телефона: " + Arrays.toString(tokens));
             }
-            loggerErrors.error(markerInfo, "Request: "+ command);
+            loggerInfo.info(markerInfo, "Request: " + command);
         }
     }
 }
