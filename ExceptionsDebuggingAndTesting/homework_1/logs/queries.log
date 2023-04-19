@@ -1,18 +1,1 @@
 
-2023-04-17 00:02:43.211 [main] INFO   - Запрос: list
-2023-04-17 00:02:45.569 [main] INFO   - Запрос: count
-2023-04-17 00:02:49.977 [main] ERROR  - Неверный формат данных: [add, vasya]
-2023-04-17 00:02:49.977 [main] INFO   - Запрос: add vasya
-2023-04-17 00:03:12.265 [main] INFO   - Запрос: add vasya pupkin vfal@mail.com 1234567890
-2023-04-17 00:03:15.257 [main] INFO   - Запрос: list
-2023-04-17 00:03:36.705 [main] ERROR  - Неверный email: [add, vas pupkin vfal@mail.co 1234567890]
-2023-04-17 00:03:36.705 [main] INFO   - Запрос: add vas pupkin vfal@mail.co 1234567890
-2023-04-17 00:03:51.192 [main] INFO   - Запрос: add vas pupkin vfal@mail.com +1234567890
-2023-04-17 00:03:54.608 [main] INFO   - Запрос: list
-2023-04-17 00:04:12.352 [main] INFO   - Запрос: 
-2023-04-17 00:04:12.352 [main] ERROR  - Неверный формат номера телефона: [add, vas pupkin vfal@mail.com +1234567]
-2023-04-17 00:04:12.353 [main] INFO   - Запрос: add vas pupkin vfal@mail.com +1234567
-2023-04-17 00:04:39.601 [main] ERROR  - Неверный формат данных: [add, petya loh pet@vfa. ru 645s]
-2023-04-17 00:04:39.602 [main] INFO   - Запрос: add petya loh pet@vfa. ru 645s
-2023-04-17 00:04:54.074 [main] ERROR  - Неверный формат номера телефона: [add, petya loh pet@vfa.ru 645s]
-2023-04-17 00:04:54.074 [main] INFO   - Запрос: add petya loh pet@vfa.ru 645s

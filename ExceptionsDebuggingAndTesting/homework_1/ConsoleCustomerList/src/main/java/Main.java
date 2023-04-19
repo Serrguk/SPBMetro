@@ -1,5 +1,7 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,7 +21,8 @@ public class Main {
         CustomerStorage executor = new CustomerStorage();
 
         Logger loggerErrors = LogManager.getRootLogger();
-        Logger loggerInfo = LogManager.getRootLogger();
+        Marker markerError = MarkerManager.getMarker("ERROR");
+        Marker markerInfo = MarkerManager.getMarker("INFO");
 
         while (true) {
 
@@ -40,15 +43,15 @@ public class Main {
             } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
                 System.out.println("Wrong format! Correct format example: add Василий Петров " +
                         "vasily.petrov@gmail.com +79215637722");
-                loggerErrors.error("Неверный формат данных: " + Arrays.toString(tokens));
+                loggerErrors.error(markerError, "Неверный формат данных: " + Arrays.toString(tokens));
             } catch (EmailFormatException ex) {
                 System.out.println(ex.getMessage());
-                loggerErrors.error("Неверный email: " + Arrays.toString(tokens));
+                loggerErrors.error(markerError, "Неверный email: " + Arrays.toString(tokens));
             } catch (PhoneNumberFormatException ex) {
                 System.out.println(ex.getMessage());
-                loggerErrors.error("Неверный формат номера телефона: " + Arrays.toString(tokens));
+                loggerErrors.error(markerError, "Неверный формат номера телефона: " + Arrays.toString(tokens));
             }
-            loggerInfo.info("Запрос: " + command);
+            loggerErrors.error(markerInfo, "Request: "+ command);
         }
     }
 }
